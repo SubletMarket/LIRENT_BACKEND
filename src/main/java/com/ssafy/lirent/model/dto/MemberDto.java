@@ -1,9 +1,8 @@
-package com.ssafy.lirent.model;
+package com.ssafy.lirent.model.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.sql.Timestamp;
 
 @Getter

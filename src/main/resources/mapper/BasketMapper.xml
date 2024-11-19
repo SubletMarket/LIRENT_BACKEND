@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.lirent.model.mapper.BasketMapper">
+
+    <!-- 즐겨찾기 등록 -->
+    <insert id="insertBasket" parameterType="BasketDto">
+        INSERT INTO basket (member_id, sublease_id)
+        VALUES (#{memberId}, #{subleaseId})
+    </insert>
+
+    <!-- 즐겨찾기 삭제 -->
+    <delete id="deleteBasket">
+        DELETE FROM basket 
+        WHERE member_id = #{memberId} AND sublease_id = #{subleaseId}
+    </delete>
+
+    <!-- 모든 즐겨찾기 조회 -->
+    <select id="selectAllBaskets" parameterType="int" resultType="BasketDto">
+        SELECT member_id AS memberId, 
+               sublease_id AS subleaseId
+        FROM basket
+        WHERE member_id = #{memberId}
+    </select>
+
+</mapper>

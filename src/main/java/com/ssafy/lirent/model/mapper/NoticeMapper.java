@@ -1,8 +1,8 @@
 package com.ssafy.lirent.model.mapper;
 
 import java.util.List;
-import com.ssafy.lirent.model.NoticeDto;
 import org.apache.ibatis.annotations.Mapper;
+import com.ssafy.lirent.model.dto.NoticeDto;
 
 @Mapper
 public interface NoticeMapper {

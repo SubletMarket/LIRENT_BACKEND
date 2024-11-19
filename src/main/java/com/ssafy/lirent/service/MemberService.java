@@ -1,6 +1,6 @@
 package com.ssafy.lirent.service;
 
-import com.ssafy.lirent.model.MemberDto;
+import com.ssafy.lirent.model.dto.MemberDto;
 import com.ssafy.lirent.model.mapper.MemberMapper;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
