@@ -1,12 +1,12 @@
 package com.ssafy.lirent.service;
 
-import com.ssafy.lirent.model.MemberDto;
+import com.ssafy.lirent.model.dto.MemberDto;
 import com.ssafy.lirent.model.mapper.MemberMapper;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+//TODO: accessToken 접속시 갱신기능
 
 @Service
 @NoArgsConstructor
@@ -33,4 +33,34 @@ public class MemberService {
             return memberId;
         }
     }
+
+    public boolean regist(MemberDto newMember) {
+        int result = mapper.regist(newMember);
+        if (result <= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public boolean update(MemberDto member) {
+        int result = mapper.update(member);
+        if (result <= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean delete(int memberId) {
+        int result = mapper.delete(memberId);
+
+        if (result <= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

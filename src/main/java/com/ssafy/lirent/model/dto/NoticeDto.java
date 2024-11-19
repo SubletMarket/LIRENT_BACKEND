@@ -1,4 +1,4 @@
-package com.ssafy.lirent.model;
+package com.ssafy.lirent.model.dto;
 
 import java.time.LocalDateTime;
 

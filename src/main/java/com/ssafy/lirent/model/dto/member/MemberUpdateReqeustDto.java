@@ -1,22 +1,16 @@
-package com.ssafy.lirent.model.dto;
+package com.ssafy.lirent.model.dto.member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-
-import java.sql.Timestamp;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
-public class MemberDto {
-    int memberId;
+public class MemberUpdateReqeustDto {
     String email;
     String password;
     String phone;
     String address;
     String nickname;
-    Timestamp created;
 }

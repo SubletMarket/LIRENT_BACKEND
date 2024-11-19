@@ -24,4 +24,24 @@
         FROM members
         WHERE email = #{email} AND password = #{password}
     </select>
+
+    <insert id="regist" parameterType="memberDto">
+        INSERT INTO members(email, password, phone, address, nickname)
+        VALUES (#{email}, #{password}, #{phone}, #{address}, #{nickname});
+    </insert>
+
+    <update id="update" parameterType="memberDto">
+        UPDATE members
+        SET email=#{email},
+            password=#{password},
+            phone=#{phone},
+            address=#{address},
+            nickname=#{nickname}
+        WHERE member_id=#{memberId}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM members
+        WHERE member_id=#{memberId}
+    </delete>
 </mapper>

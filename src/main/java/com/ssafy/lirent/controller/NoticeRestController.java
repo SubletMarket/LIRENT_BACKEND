@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.ssafy.lirent.model.NoticeDto;
-import com.ssafy.lirent.model.MemberDto;
+import com.ssafy.lirent.model.dto.NoticeDto;
+import com.ssafy.lirent.model.dto.MemberDto;
 import com.ssafy.lirent.service.NoticeService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,7 +41,7 @@ public class NoticeRestController {
         	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not logined.");
         }
         
-        notice.setMemberId(member.getId());
+        notice.setMemberId(String.valueOf(member.getMemberId()));
         
         noticeService.insertNotice(notice);
         return ResponseEntity.status(HttpStatus.CREATED).body(notice);

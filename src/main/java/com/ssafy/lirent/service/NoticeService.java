@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ssafy.lirent.model.NoticeDto;
+import com.ssafy.lirent.model.dto.NoticeDto;
 import com.ssafy.lirent.model.mapper.NoticeMapper;
 //import com.ssafy.lirent.model.mapper.MemberMapper;
 
