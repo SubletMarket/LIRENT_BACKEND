@@ -29,7 +29,7 @@ public class JwtUtil {
     @Value("${jwt.refresh-token.expiretime}")
     private long refreshTokenExpireTime;
 
-    public String createAccessToken(String memberId) {
+    public String createAccessToken(int memberId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("memberId", memberId);
         claims.put("tokenType", "ACCESS");
@@ -37,7 +37,7 @@ public class JwtUtil {
     }
 
     //	AccessToken에 비해 유효기간을 길게 설정.
-    public String createRefreshToken(String memberId) {
+    public String createRefreshToken(int memberId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("memberId", memberId);
         claims.put("tokenType", "REFRESH");
@@ -80,7 +80,7 @@ public class JwtUtil {
         }
     }
 
-    public String getMemberId(String authorization) {
+    public Integer getMemberId(String authorization) {
         Jws<Claims> claims = null;
         try {
             claims = Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(authorization);
@@ -90,7 +90,7 @@ public class JwtUtil {
         }
         Map<String, Object> value = claims.getPayload();
         log.info("value : {}", value);
-        return (String) value.get("memberId");
+        return (int) value.get("memberId");
     }
 
 }
