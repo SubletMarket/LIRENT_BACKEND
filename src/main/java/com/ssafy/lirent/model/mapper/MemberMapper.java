@@ -16,9 +16,7 @@ public interface MemberMapper {
      * @return MemberId
      */
     public Integer login(String email, String password);
-
     public int regist(MemberDto newMember);
-
     /**
      * 멤버 ID를 기준으로 내용을 갱신
      * @param memberDto

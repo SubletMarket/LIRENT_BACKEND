@@ -1,4 +1,4 @@
-package com.ssafy.lirent.model.dto;
+package com.ssafy.lirent.model.dto.notice;
 
 import java.time.LocalDateTime;
 
@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class NoticeDto {
+public class NoticeRequestDto {
 	private int boardId;
     private int memberId;
     private String title;
