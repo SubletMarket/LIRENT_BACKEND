@@ -37,9 +37,9 @@ public class JwtUtil {
     }
 
     //	AccessToken에 비해 유효기간을 길게 설정.
-    public String createRefreshToken(String userId) {
+    public String createRefreshToken(String memberId) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", userId);
+        claims.put("memberId", memberId);
         claims.put("tokenType", "REFRESH");
         return generateToken(claims, "refresh-token", refreshTokenExpireTime);
     }
@@ -64,7 +64,7 @@ public class JwtUtil {
     }
 
     //	전달 받은 토큰이 제대로 생성된 것인지 확인 하고 문제가 있다면 UnauthorizedException 발생.
-    public boolean checkToken(String token) {
+        public boolean checkToken(String token) {
         try {
 //			Json Web Signature? 서버에서 인증을 근거로 인증 정보를 서버의 private key 서명 한것을 토큰화 한것
 //			setSigningKey : JWS 서명 검증을 위한  secret key 세팅
@@ -80,7 +80,7 @@ public class JwtUtil {
         }
     }
 
-    public String getUserId(String authorization) {
+    public String getMemberId(String authorization) {
         Jws<Claims> claims = null;
         try {
             claims = Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(authorization);
@@ -90,7 +90,7 @@ public class JwtUtil {
         }
         Map<String, Object> value = claims.getPayload();
         log.info("value : {}", value);
-        return (String) value.get("userId");
+        return (String) value.get("memberId");
     }
 
 }
