@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Member {
+public class MemberDto {
     int memberId;
     String email;
     String password;
