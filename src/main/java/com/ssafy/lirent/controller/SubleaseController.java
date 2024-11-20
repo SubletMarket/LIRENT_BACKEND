@@ -7,12 +7,10 @@ import com.ssafy.lirent.service.SubleaseService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/sublease")
@@ -37,6 +35,17 @@ public class SubleaseController {
 
         if (subleaseService.insert(newSublease)) {
             return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<SubleaseDto>> getAllSubleases() {
+        List<SubleaseDto> list = subleaseService.getAllSubleases();
+
+        if (list != null) {
+            return ResponseEntity.ok(list);
         } else {
             return ResponseEntity.badRequest().build();
         }

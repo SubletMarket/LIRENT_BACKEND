@@ -35,6 +35,8 @@ public class JwtInterceptor implements HandlerInterceptor {
             return true;
         } else if ("/api/member/token".equalsIgnoreCase(uri)) {
             return true;
+        } else if ("/api/sublease".equalsIgnoreCase(uri)) {
+            return true;
         }
 
         // JWT 토큰 유효성 여부 확인 및 처리

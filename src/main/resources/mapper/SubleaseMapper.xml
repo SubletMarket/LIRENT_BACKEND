@@ -3,8 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.lirent.model.mapper.SubleaseMapper">
+    <resultMap id="sublease" type="SubleaseDto">
+        <result property="subleaseId" column="sublease_id"/>
+        <result property="memberId" column="member_id"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="deposit" column="deposit"/>
+        <result property="price" column="price"/>
+        <result property="created" column="created"/>
+    </resultMap>
+
     <insert id="insert" parameterType="subleaseDto">
         INSERT INTO subleases(member_id, start_date, end_date, deposit, price)
         VALUES (#{memberId}, #{startDate}, #{endDate}, #{deposit}, #{price})
     </insert>
+    <select id="selectAll" resultMap="sublease">
+        SELECT sublease_id, member_id, start_date, end_date, deposit, price, created
+        FROM subleases;
+    </select>
 </mapper>

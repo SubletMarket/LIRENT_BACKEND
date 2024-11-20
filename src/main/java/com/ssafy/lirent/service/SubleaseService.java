@@ -5,6 +5,8 @@ import com.ssafy.lirent.model.mapper.SubleaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SubleaseService {
     SubleaseMapper mapper;
@@ -22,5 +24,9 @@ public class SubleaseService {
         } else {
             return false;
         }
+    }
+
+    public List<SubleaseDto> getAllSubleases() {
+        return mapper.selectAll();
     }
 }
