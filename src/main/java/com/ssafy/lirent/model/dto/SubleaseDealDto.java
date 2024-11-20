@@ -1,7 +1,6 @@
 package com.ssafy.lirent.model.dto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -11,13 +10,13 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-public class SubleaseDto {
+public class SubleaseDealDto {
+    int dealId;
     int subleaseId;
-    int memberId;
+    int contractorId;
     Date startDate;
     Date endDate;
     int deposit;
-    int price;
+    int totalPrice;
     Timestamp created;
 }
