@@ -24,6 +24,7 @@ public class NoticeController {
     @GetMapping
     @Operation(summary = "게시판 전체 조회")
     public ResponseEntity<List<NoticeDto>> getNoticeList() {
+    	System.out.println("asdf");
         List<NoticeDto> notices = noticeService.getAllNotices();
         return ResponseEntity.ok(notices);
     }
