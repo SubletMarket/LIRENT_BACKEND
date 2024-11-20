@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.lirent.model.mapper.ChatsMapper">
+
+    <!-- 채팅 추가 -->
+    <insert id="insertChat" parameterType="ChatsDto">
+        INSERT INTO chats (sublease_id, member_id, is_owner, message)
+        VALUES (#{subleaseId}, #{memberId}, #{isOwner}, #{message})
+    </insert>
+
+    <!-- 특정 sublease_id의 채팅 조회 -->
+    <select id="selectChatsBySubleaseId" parameterType="int" resultType="ChatsDto">
+        SELECT sublease_id AS subleaseId, 
+               member_id AS memberId, 
+               is_owner AS isOwner, 
+               message, 
+               created
+        FROM chats
+        WHERE sublease_id = #{subleaseId}
+        ORDER BY created ASC
+    </select>
+</mapper>
