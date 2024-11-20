@@ -2,6 +2,7 @@ package com.ssafy.lirent.model.mapper;
 
 import com.ssafy.lirent.model.dto.MemberDto;
 import com.ssafy.lirent.model.dto.member.MemberRegistRequestDto;
+import com.ssafy.lirent.model.dto.member.MemberUpdateRequestDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -16,6 +17,7 @@ public interface MemberMapper {
      * @return MemberId
      */
     public Integer login(String email, String password);
+    public MemberDto getInfo(int memberId);
     public int regist(MemberDto newMember);
     /**
      * 멤버 ID를 기준으로 내용을 갱신

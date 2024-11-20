@@ -10,6 +10,12 @@
         <result column="phone" property="phone" />
         <result column="address" property="address" />
         <result column="nickname" property="nickname" />
+        <result column="park" property="park" />
+        <result column="building_elevator_num" property="buildingElevatorNum" />
+        <result column="floor" property="floor" />
+        <result column="area" property="area" />
+        <result column="rooms" property="rooms" />
+        <result column="bathrooms" property="bathrooms" />
         <result column="created" property="created" />
     </resultMap>
 
@@ -25,9 +31,37 @@
         WHERE email = #{email} AND password = #{password}
     </select>
 
+    <select id="getInfo" parameterType="int" resultMap="member">
+        SELECT member_id,
+               email,
+               password,
+               phone,
+               address,
+               nickname,
+               park,
+               building_elevator_num,
+               floor,
+               area,
+               rooms,
+               bathrooms,
+               created
+        FROM members
+        WHERE member_id = #{memberId}
+    </select>
+
     <insert id="regist" parameterType="memberDto">
-        INSERT INTO members(room_id, email, password, phone, address, nickname)
-        VALUES (#{roomId}, #{email}, #{password}, #{phone}, #{address}, #{nickname});
+        INSERT INTO members(email,
+                            password,
+                            phone,
+                            address,
+                            nickname,
+                            park,
+                            building_elevator_num,
+                            floor,
+                            area,
+                            rooms,
+                            bathrooms)
+        VALUES (#{email}, #{password}, #{phone}, #{address}, #{nickname}, #{park}, #{buildingElevatorNum}, #{floor}, #{area}, #{rooms}, #{bathrooms});
     </insert>
 
     <update id="update" parameterType="memberDto">
@@ -36,10 +70,15 @@
             password=#{password},
             phone=#{phone},
             address=#{address},
-            nickname=#{nickname}
+            nickname=#{nickname},
+            park=#{park},
+            building_elevator_num=#{buildingElevatorNum},
+            floor=#{floor},
+            area=#{area},
+            rooms=#{rooms},
+            bathrooms=#{bathrooms}
         WHERE member_id=#{memberId}
     </update>
-
     <delete id="delete" parameterType="int">
         DELETE FROM members
         WHERE member_id=#{memberId}
