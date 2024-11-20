@@ -67,7 +67,7 @@ public class ApiUtil {
             // 기본 쿼리 파라미터 추가
             urlBuilder.append("_type").append("=").append("json").append("&");
             urlBuilder.append("numOfRows").append("=").append("1").append("&");
-            urlBuilder.append("pageNo").append("=").append("1");
+            urlBuilder.append("pageNo").append("=").append(1);
 
             // HTTP 요청 보내기
             URL url = new URL(urlBuilder.toString());
