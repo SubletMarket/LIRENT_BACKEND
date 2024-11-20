@@ -26,8 +26,8 @@
     </select>
 
     <insert id="regist" parameterType="memberDto">
-        INSERT INTO members(email, password, phone, address, nickname)
-        VALUES (#{email}, #{password}, #{phone}, #{address}, #{nickname});
+        INSERT INTO members(room_id, email, password, phone, address, nickname)
+        VALUES (#{roomId}, #{email}, #{password}, #{phone}, #{address}, #{nickname});
     </insert>
 
     <update id="update" parameterType="memberDto">

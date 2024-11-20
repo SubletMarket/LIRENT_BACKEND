@@ -1,40 +1,39 @@
 package com.ssafy.lirent.controller;
 
 import com.ssafy.lirent.model.dto.MemberDto;
+import com.ssafy.lirent.model.dto.RoomInfoDto;
 import com.ssafy.lirent.model.dto.member.MemberLoginRequestDto;
 import com.ssafy.lirent.model.dto.member.MemberLoginResponseDto;
 import com.ssafy.lirent.model.dto.member.MemberRegistRequestDto;
 import com.ssafy.lirent.model.dto.member.MemberUpdateReqeustDto;
 import com.ssafy.lirent.service.MemberService;
+import com.ssafy.lirent.service.RoomInfoService;
 import com.ssafy.lirent.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/api/member")
 public class MemberController {
-    MemberService service;
+    MemberService memberService;
+    RoomInfoService roomInfoService;
     JwtUtil jwtUtil;
 
     @Autowired
-    public MemberController(MemberService service, JwtUtil jwtUtil) {
-        this.service = service;
+    public MemberController(MemberService memberService, RoomInfoService roomInfoService, JwtUtil jwtUtil) {
+        this.memberService = memberService;
+        this.roomInfoService = roomInfoService;
         this.jwtUtil = jwtUtil;
     }
-
 
     @PostMapping("/token")
     @Operation(summary = "JWT기반 로그인")
     ResponseEntity<MemberLoginResponseDto> login(MemberLoginRequestDto dto) {
-        Integer memberId = service.login(dto.getEmail(), dto.getPassword());
+        Integer memberId = memberService.login(dto.getEmail(), dto.getPassword());
 
         if (memberId == null) { // 멤버가 없을 경우
             return ResponseEntity.notFound().build();
@@ -51,19 +50,37 @@ public class MemberController {
 
     @PostMapping
     @Operation(summary = "회원가입")
-    ResponseEntity<Void> regist(MemberRegistRequestDto dto) {
-        MemberDto newMember = new MemberDto();
-        newMember.setEmail(dto.getEmail());
-        newMember.setPassword(dto.getPassword());
-        newMember.setNickname(dto.getNickname());
-        newMember.setPhone(dto.getPhone());
-        newMember.setAddress(dto.getAddress());
+    ResponseEntity<Void> regist(@RequestBody MemberRegistRequestDto dto) {
+        // 해당 멤버와 관련된 집 정보 생성
+        String sigunguCode = dto.getBcode().substring(0, 5);
+        String dongCode = dto.getBcode().substring(5, 10);
 
-        if (service.regist(newMember)) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        RoomInfoDto newRoomInfo = roomInfoService.initRoomInfo(sigunguCode, dongCode, dto.getBun(), dto.getJi());
+        newRoomInfo.setAddress(dto.getAddress());
+        newRoomInfo.setBcode(dto.getBcode());
+        newRoomInfo.setDong(dto.getDong());
+        newRoomInfo.setHo(dto.getHo());
+        newRoomInfo.setFloor(dto.getFloor());
+        newRoomInfo.setArea(dto.getArea());
+        newRoomInfo.setRooms(dto.getRooms());
+        newRoomInfo.setBathrooms(dto.getBathrooms());
+
+        if (roomInfoService.insert(newRoomInfo)) {
+            // 멤버 생성
+            MemberDto newMember = new MemberDto();
+            newMember.setEmail(dto.getEmail());
+            newMember.setPassword(dto.getPassword());
+            newMember.setNickname(dto.getNickname());
+            newMember.setPhone(dto.getPhone());
+            newMember.setAddress(dto.getAddress());
+            newMember.setRoomId(newRoomInfo.getRoomId());
+
+            if (memberService.regist(newMember)) {
+                return ResponseEntity.ok().build();
+            }
         }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @PutMapping
@@ -79,7 +96,7 @@ public class MemberController {
         member.setNickname(dto.getNickname());
         member.setAddress(dto.getAddress());
 
-        if (service.update(member)) {
+        if (memberService.update(member)) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.badRequest().build();
@@ -91,7 +108,7 @@ public class MemberController {
     ResponseEntity<Void> delete(HttpServletRequest request) {
         int memberId = (int) request.getAttribute("memberId");
 
-        if (service.delete(memberId)) {
+        if (memberService.delete(memberId)) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.badRequest().build();

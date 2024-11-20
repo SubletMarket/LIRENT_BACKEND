@@ -9,9 +9,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class MemberRegistRequestDto {
+    // member 생성용
     String email;
     String password;
     String phone;
     String address;
     String nickname;
+
+    // roomInfo 생성용
+    String bcode;
+    String bun;
+    String ji;
+
+    String dong;
+    String ho;
+    int floor;
+    double area;
+    int rooms;
+    int bathrooms;
 }

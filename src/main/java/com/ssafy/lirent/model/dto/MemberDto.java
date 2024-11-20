@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class MemberDto {
     int memberId;
+    int roomId;
     String email;
     String password;
     String phone;

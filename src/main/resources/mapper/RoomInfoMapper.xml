@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.lirent.model.mapper.RoomInfoMapper">
+    <insert id="insert" parameterType="roomInfoDto" keyProperty="roomId" useGeneratedKeys="true">
+        INSERT INTO room_info(address, bcode, dong, ho, building_floor, building_type, building_approve_date, building_elevator_num, floor, area, rooms, bathrooms)
+        VALUES (#{address}, #{bcode}, #{dong}, #{ho}, #{buildingFloor}, #{buildingType}, #{buildingApproveDate}, #{buildingElevatorNum}, #{floor}, #{area}, #{rooms}, #{bathrooms})
+    </insert>
+</mapper>

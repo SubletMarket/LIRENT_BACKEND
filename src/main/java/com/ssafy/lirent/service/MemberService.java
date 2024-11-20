@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 public class MemberService {
     MemberMapper mapper;
+    RoomInfoService roomInfoService;
 
     @Autowired
-    public MemberService(MemberMapper mapper) {
+    public MemberService(MemberMapper mapper, RoomInfoService roomInfoService) {
         this.mapper = mapper;
+        this.roomInfoService = roomInfoService;
     }
 
     /**
@@ -36,7 +38,8 @@ public class MemberService {
 
     public boolean regist(MemberDto newMember) {
         int result = mapper.regist(newMember);
-        if (result <= 1) {
+
+        if (result >= 1) {
             return true;
         } else {
             return false;
@@ -46,7 +49,7 @@ public class MemberService {
 
     public boolean update(MemberDto member) {
         int result = mapper.update(member);
-        if (result <= 1) {
+        if (result >= 1) {
             return true;
         } else {
             return false;
@@ -56,7 +59,7 @@ public class MemberService {
     public boolean delete(int memberId) {
         int result = mapper.delete(memberId);
 
-        if (result <= 1) {
+        if (result >= 1) {
             return true;
         } else {
             return false;
