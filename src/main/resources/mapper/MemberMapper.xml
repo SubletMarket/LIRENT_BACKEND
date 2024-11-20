@@ -16,6 +16,8 @@
         <result column="area" property="area" />
         <result column="rooms" property="rooms" />
         <result column="bathrooms" property="bathrooms" />
+        <result column="latitude" property="longitude" />
+        <result column="longitude" property="longitude" />
         <result column="created" property="created" />
     </resultMap>
 
@@ -44,6 +46,8 @@
                area,
                rooms,
                bathrooms,
+               latitude,
+               longitude,
                created
         FROM members
         WHERE member_id = #{memberId}
@@ -60,7 +64,10 @@
                             floor,
                             area,
                             rooms,
-                            bathrooms)
+                            bathrooms,
+                            latitude,
+                            longitude
+                            )
         VALUES (#{email}, #{password}, #{phone}, #{address}, #{nickname}, #{park}, #{buildingElevatorNum}, #{floor}, #{area}, #{rooms}, #{bathrooms});
     </insert>
 
@@ -76,7 +83,9 @@
             floor=#{floor},
             area=#{area},
             rooms=#{rooms},
-            bathrooms=#{bathrooms}
+            bathrooms=#{bathrooms},
+            latitude=#{latitude},
+            longitude=#{longitude}
         WHERE member_id=#{memberId}
     </update>
     <delete id="delete" parameterType="int">

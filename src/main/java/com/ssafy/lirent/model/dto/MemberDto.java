@@ -26,6 +26,8 @@ public class MemberDto {
     int area;
     int rooms;
     int bathrooms;
+    String latitude;
+    String longitude;
 
     Timestamp created;
 }

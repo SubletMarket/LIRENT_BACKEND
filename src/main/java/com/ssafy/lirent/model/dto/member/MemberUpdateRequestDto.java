@@ -22,4 +22,6 @@ public class MemberUpdateRequestDto {
     int area;
     int rooms;
     int bathrooms;
+    String latitude;
+    String longitude;
 }

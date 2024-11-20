@@ -73,6 +73,8 @@ public class MemberController {
         newMember.setArea(dto.getArea());
         newMember.setRooms(dto.getRooms());
         newMember.setBathrooms(dto.getBathrooms());
+        newMember.setLatitude(dto.getLatitude());
+        newMember.setLongitude(dto.getLongitude());
 
         if (memberService.regist(newMember)) {
             return ResponseEntity.ok().build();
@@ -99,6 +101,9 @@ public class MemberController {
         member.setArea(dto.getArea());
         member.setRooms(dto.getRooms());
         member.setBathrooms(dto.getBathrooms());
+        member.setLatitude(dto.getLatitude());
+        member.setLongitude(dto.getLongitude());
+
 
         if (memberService.update(member)) {
             return ResponseEntity.ok().build();
