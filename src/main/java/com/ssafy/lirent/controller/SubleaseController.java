@@ -51,4 +51,15 @@ public class SubleaseController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping("{subleaseId}")
+    public ResponseEntity<SubleaseGetResponseDto> getSublease(@PathVariable int subleaseId) {
+        SubleaseGetResponseDto sublease = subleaseService.getSublease(subleaseId);
+
+        if (sublease != null) {
+            return ResponseEntity.ok(sublease);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

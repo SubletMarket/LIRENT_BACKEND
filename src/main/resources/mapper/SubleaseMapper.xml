@@ -13,14 +13,64 @@
         <result property="created" column="created"/>
         <result property="latitude" column="latitude" />
         <result property="longitude" column="longitude" />
+        <result property="phone" column="phone" />
+        <result property="address" column="address" />
+        <result property="nickname" column="nickname" />
+        <result property="park" column="park" />
+        <result property="buildingElevatorNum" column="building_elevator_num" />
+        <result property="floor" column="floor" />
+        <result property="area" column="area" />
+        <result property="rooms" column="rooms" />
+        <result property="bathrooms" column="bathrooms" />
     </resultMap>
 
     <insert id="insert" parameterType="subleaseDto">
         INSERT INTO subleases(member_id, start_date, end_date, deposit, price)
         VALUES (#{memberId}, #{startDate}, #{endDate}, #{deposit}, #{price})
     </insert>
+
     <select id="selectAll" resultMap="subleaseResponse">
-        SELECT sublease_id, members.member_id as member_id, start_date, end_date, deposit, price, subleases.created as created, latitude, longitude
+        SELECT sublease_id,
+               members.member_id as member_id,
+               start_date,
+               end_date,
+               deposit,
+               price,
+               subleases.created as created,
+               latitude,
+               longitude,
+               phone,
+               address,
+               nickname,
+               park,
+               building_elevator_num,
+               floor,
+               area,
+               rooms,
+               bathrooms
         FROM subleases JOIN members USING (member_id);
+    </select>
+
+    <select id="select" resultMap="subleaseResponse">
+        SELECT sublease_id,
+               members.member_id as member_id,
+               start_date,
+               end_date,
+               deposit,
+               price,
+               subleases.created as created,
+               latitude,
+               longitude,
+               phone,
+               address,
+               nickname,
+               park,
+               building_elevator_num,
+               floor,
+               area,
+               rooms,
+               bathrooms
+        FROM subleases JOIN members USING (member_id)
+        WHERE sublease_id = #{subleaseId}
     </select>
 </mapper>
