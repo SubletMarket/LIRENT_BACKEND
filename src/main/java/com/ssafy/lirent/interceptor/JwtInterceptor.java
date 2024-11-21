@@ -19,14 +19,14 @@ import java.util.regex.Pattern;
  */
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
-    JwtUtil jwtUtil;
+	JwtUtil jwtUtil;
 
-    @Autowired
-    public JwtInterceptor(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
-    }
+	@Autowired
+	public JwtInterceptor(JwtUtil jwtUtil) {
+		this.jwtUtil = jwtUtil;
+	}
 
-    @Override
+	@Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();
         String method = request.getMethod();
@@ -44,6 +44,10 @@ public class JwtInterceptor implements HandlerInterceptor {
             return true;
         } else if (uri.startsWith("/api/sublease")) {
             return true;
+        }else if("/api/contract/generate".equalsIgnoreCase(uri)){
+        	return true;
+        }else if("/api/contract/download".equalsIgnoreCase(uri)){
+        	return true;
         }
 
         // JWT 토큰 유효성 여부 확인 및 처리
