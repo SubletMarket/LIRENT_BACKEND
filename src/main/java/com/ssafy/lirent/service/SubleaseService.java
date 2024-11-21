@@ -30,4 +30,6 @@ public class SubleaseService {
     public List<SubleaseGetResponseDto> getAllSubleases() {
         return mapper.selectAll();
     }
+
+    public SubleaseGetResponseDto getSublease(int subleaseId) { return mapper.select(subleaseId);}
 }

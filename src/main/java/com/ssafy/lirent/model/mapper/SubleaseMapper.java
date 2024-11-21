@@ -10,4 +10,5 @@ import java.util.List;
 public interface SubleaseMapper {
     public int insert(SubleaseDto newSublease);
     public List<SubleaseGetResponseDto> selectAll();
+    public SubleaseGetResponseDto select(int subleaseId);
 }

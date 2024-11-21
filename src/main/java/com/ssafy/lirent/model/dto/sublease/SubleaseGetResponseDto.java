@@ -20,4 +20,14 @@ public class SubleaseGetResponseDto {
     Timestamp created;
     String latitude;
     String longitude;
+
+    String phone;
+    String address;
+    String nickname;
+    boolean park;
+    int buildingElevatorNum;
+    int floor;
+    int area;
+    int rooms;
+    int bathrooms;
 }
