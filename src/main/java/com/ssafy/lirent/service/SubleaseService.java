@@ -1,6 +1,7 @@
 package com.ssafy.lirent.service;
 
 import com.ssafy.lirent.model.dto.SubleaseDto;
+import com.ssafy.lirent.model.dto.sublease.SubleaseGetResponseDto;
 import com.ssafy.lirent.model.mapper.SubleaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class SubleaseService {
         }
     }
 
-    public List<SubleaseDto> getAllSubleases() {
+    public List<SubleaseGetResponseDto> getAllSubleases() {
         return mapper.selectAll();
     }
 }

@@ -3,6 +3,7 @@ package com.ssafy.lirent.controller;
 import com.ssafy.lirent.model.dto.MemberDto;
 import com.ssafy.lirent.model.dto.SubleaseDto;
 import com.ssafy.lirent.model.dto.sublease.SubleaseAddRequestDto;
+import com.ssafy.lirent.model.dto.sublease.SubleaseGetResponseDto;
 import com.ssafy.lirent.service.SubleaseService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,8 @@ public class SubleaseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SubleaseDto>> getAllSubleases() {
-        List<SubleaseDto> list = subleaseService.getAllSubleases();
+    public ResponseEntity<List<SubleaseGetResponseDto>> getAllSubleases() {
+        List<SubleaseGetResponseDto> list = subleaseService.getAllSubleases();
 
         if (list != null) {
             return ResponseEntity.ok(list);

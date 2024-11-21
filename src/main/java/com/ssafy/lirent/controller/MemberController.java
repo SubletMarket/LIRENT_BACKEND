@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/member")
+@CrossOrigin(origins = {"http://localhost:5173"})
 public class MemberController {
     MemberService memberService;
     JwtUtil jwtUtil;

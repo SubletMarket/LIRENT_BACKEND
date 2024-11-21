@@ -16,7 +16,7 @@
         <result column="area" property="area" />
         <result column="rooms" property="rooms" />
         <result column="bathrooms" property="bathrooms" />
-        <result column="latitude" property="longitude" />
+        <result column="latitude" property="latitude" />
         <result column="longitude" property="longitude" />
         <result column="created" property="created" />
     </resultMap>
