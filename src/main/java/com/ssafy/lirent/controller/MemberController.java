@@ -53,7 +53,7 @@ public class MemberController {
         return ResponseEntity.ok(responseDto);
     }
 
-    @GetMapping
+    @GetMapping("/userinfo")
     @Operation(summary = "회원 정보 가져오기")
     ResponseEntity<MemberDto> getInfo(HttpServletRequest request) {
         int memberId = (int) request.getAttribute("memberId");
