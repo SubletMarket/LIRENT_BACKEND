@@ -1,10 +1,13 @@
 package com.ssafy.lirent.service;
 
 import com.ssafy.lirent.model.dto.MemberDto;
+import com.ssafy.lirent.model.dto.member.MemberUpdateRequestDto;
 import com.ssafy.lirent.model.mapper.MemberMapper;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Member;
 
 //TODO: accessToken 접속시 갱신기능
 
@@ -12,12 +15,10 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 public class MemberService {
     MemberMapper mapper;
-    RoomInfoService roomInfoService;
 
     @Autowired
-    public MemberService(MemberMapper mapper, RoomInfoService roomInfoService) {
+    public MemberService(MemberMapper mapper) {
         this.mapper = mapper;
-        this.roomInfoService = roomInfoService;
     }
 
     /**
@@ -46,9 +47,12 @@ public class MemberService {
         }
     }
 
-
+    public MemberDto getInfo(int memberId) {
+        return mapper.getInfo(memberId);
+    }
     public boolean update(MemberDto member) {
         int result = mapper.update(member);
+
         if (result >= 1) {
             return true;
         } else {

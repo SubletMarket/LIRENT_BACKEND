@@ -30,10 +30,18 @@ public class JwtInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         String method = request.getMethod();
 
+        // PREFLIGHT 예외 설정
+        if ("OPTIONS".equalsIgnoreCase(method)) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return true;
+        }
+
         // 경로 예외 설정
         if ("/api/member".equals(uri) && "POST".equalsIgnoreCase(method)) {
             return true;
         } else if ("/api/member/token".equalsIgnoreCase(uri)) {
+            return true;
+        } else if ("/api/sublease".equalsIgnoreCase(uri)) {
             return true;
         }
 

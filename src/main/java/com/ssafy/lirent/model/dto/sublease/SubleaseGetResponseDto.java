@@ -1,18 +1,16 @@
-package com.ssafy.lirent.model.dto;
+package com.ssafy.lirent.model.dto.sublease;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
-public class SubleaseDto {
+public class SubleaseGetResponseDto {
     int subleaseId;
     int memberId;
     Date startDate;
@@ -20,4 +18,6 @@ public class SubleaseDto {
     int deposit;
     int price;
     Timestamp created;
+    String latitude;
+    String longitude;
 }
