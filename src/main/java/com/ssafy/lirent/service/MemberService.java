@@ -28,7 +28,7 @@ public class MemberService {
      */
     public Integer login(String email, String password) {
         Integer memberId = mapper.login(email, password);
-
+        System.out.println("haha" + email +" " + password);
         if (memberId == null) { // 해당하는 멤버가 없을 경우
             return null;
         } else {

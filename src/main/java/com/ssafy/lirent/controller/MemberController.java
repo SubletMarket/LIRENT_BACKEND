@@ -11,7 +11,6 @@ import com.ssafy.lirent.service.RoomInfoService;
 import com.ssafy.lirent.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,6 @@ public class MemberController {
     RoomInfoService roomInfoService;
     JwtUtil jwtUtil;
 
-    @Autowired
     public MemberController(MemberService memberService, RoomInfoService roomInfoService, JwtUtil jwtUtil) {
         this.memberService = memberService;
         this.roomInfoService = roomInfoService;
@@ -32,19 +30,25 @@ public class MemberController {
 
     @PostMapping("/token")
     @Operation(summary = "JWT기반 로그인")
-    ResponseEntity<MemberLoginResponseDto> login(MemberLoginRequestDto dto) {
+    ResponseEntity<MemberLoginResponseDto> login(@RequestBody MemberLoginRequestDto dto) {
         Integer memberId = memberService.login(dto.getEmail(), dto.getPassword());
+        
+        System.out.println(dto.getEmail());
+        System.out.println(dto.getPassword());
 
+        System.out.println("Here!!");
+        System.out.println(memberId); 
+        
         if (memberId == null) { // 멤버가 없을 경우
             return ResponseEntity.notFound().build();
         }
 
         // 멤버가 있을 경우
         String accessToken = jwtUtil.createAccessToken(memberId);
-
         MemberLoginResponseDto responseDto = new MemberLoginResponseDto();
         responseDto.setAccessToken(accessToken);
-
+        
+        System.out.println(ResponseEntity.ok(responseDto));
         return ResponseEntity.ok(responseDto);
     }
 
