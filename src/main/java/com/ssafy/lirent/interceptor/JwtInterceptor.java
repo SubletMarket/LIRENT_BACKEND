@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * JWT 인증 처리 Interceptor
@@ -41,7 +42,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             return true;
         } else if ("/api/member/token".equalsIgnoreCase(uri)) {
             return true;
-        } else if ("/api/sublease".equalsIgnoreCase(uri)) {
+        } else if (uri.startsWith("/api/sublease")) {
             return true;
         }
 
