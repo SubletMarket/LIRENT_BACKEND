@@ -4,57 +4,72 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.lirent.model.mapper.NoticeMapper">
 
-    <!-- 공지사항 추가 -->
-    <insert id="insertNotice" parameterType="NoticeDto">
-        INSERT INTO notice (title, member_id, context)
-        VALUES (#{title}, #{memberId}, #{context})
-    </insert>
+	<!-- 공지사항 추가 -->
+	<insert id="insertNotice" parameterType="NoticeDto">
+		INSERT INTO notice
+		(title, member_id, context, nickname, category)
+		VALUES (#{title},
+		#{memberId}, #{context}, #{nickname}, #{category})
+	</insert>
 
-    <!-- 공지사항 수정 -->
-    <update id="updateNotice" parameterType="NoticeDto">
-        UPDATE notice
-        SET title = #{title}, context = #{context}
-        WHERE board_id = #{boardId}
-    </update>
+	<!-- 공지사항 수정 -->
+	<update id="updateNotice" parameterType="NoticeDto">
+		UPDATE notice
+		SET title =
+		#{title}, context = #{context}, category = #{category}
+		WHERE board_id =
+		#{boardId}
+	</update>
 
-    <!-- 공지사항 삭제 -->
-    <delete id="deleteNotice" parameterType="int">
-        DELETE FROM notice WHERE board_id = #{boardId}
-    </delete>
+	<!-- 공지사항 삭제 -->
+	<delete id="deleteNotice" parameterType="int">
+		DELETE FROM notice WHERE
+		board_id = #{boardId}
+	</delete>
 
-    <!-- 특정 공지사항 조회 -->
-    <select id="selectNoticeById" parameterType="int" resultType="NoticeDto">
-        SELECT board_id AS boardId, 
-               member_id AS memberId, 
-               title, 
-               context, 
-               created AS createdDate
-        FROM notice
-        WHERE board_id = #{boardId}
-    </select>
+	<!-- 특정 공지사항 조회 -->
+	<select id="selectNoticeById" parameterType="int"
+		resultType="NoticeDto">
+		SELECT board_id AS boardId,
+		member_id AS memberId,
+		title,
+		context,
+		category,
+		nickname,
+		created AS createdDate
+		FROM notice
+		WHERE board_id = #{boardId}
+	</select>
 
-    <!-- 모든 공지사항 조회 -->
-    <select id="selectAllNotices" resultType="NoticeDto">
-        SELECT board_id AS boardId, 
-               member_id AS memberId, 
-               title, 
-               context, 
-               created AS createdDate
-        FROM notice
-        ORDER BY created DESC
-    </select>
+	<!-- 전체 공지사항 조회 -->
+	<select id="selectAllNotices" resultType="NoticeDto">
+		SELECT board_id AS
+		boardId,
+		member_id AS memberId,
+		title,
+		context,
+		category,
+		nickname,
+		created AS createdDate
+		FROM notice
+		ORDER BY created DESC
+	</select>
 
-    <!-- 공지사항 검색 -->
-    <select id="searchNotices" parameterType="string" resultType="NoticeDto">
-        SELECT board_id AS boardId, 
-               member_id AS memberId, 
-               title, 
-               context, 
-               created AS createdDate
-        FROM notice
-        WHERE title LIKE CONCAT('%', #{keyword}, '%')
-           OR context LIKE CONCAT('%', #{keyword}, '%')
-        ORDER BY created DESC
-    </select>
+	<!-- 공지사항 검색 -->
+	<select id="searchNotices" parameterType="string"
+		resultType="NoticeDto">
+		SELECT board_id AS boardId,
+		member_id AS memberId,
+		title,
+		context,
+		nickname,
+		created AS createdDate
+		FROM notice
+		WHERE title LIKE
+		CONCAT('%', #{keyword}, '%')
+		OR context LIKE CONCAT('%', #{keyword},
+		'%')
+		ORDER BY created DESC
+	</select>
 
 </mapper>

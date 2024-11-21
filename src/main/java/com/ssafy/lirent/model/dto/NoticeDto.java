@@ -11,9 +11,10 @@ import lombok.Setter;
 @Setter
 public class NoticeDto {
 	private int boardId;
-    private int memberId;
-    private String title;
-    private String context;    
+	private int memberId;
+	private String title;
+	private String context;
+	private String nickname;
+	private String category;
 	private LocalDateTime createdDate;
 }
-
