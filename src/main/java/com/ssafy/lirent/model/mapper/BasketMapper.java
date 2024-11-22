@@ -7,7 +7,7 @@ import com.ssafy.lirent.model.dto.BasketDto;
 
 @Mapper
 public interface BasketMapper {
-    void insertBasket(BasketDto bascket);
+    void insertBasket(BasketDto basket);
     void deleteBasket(@Param("memberId") int memberId, @Param("subleaseId") int subleaseId);
     List<BasketDto> selectAllBaskets(int memberId);
 }

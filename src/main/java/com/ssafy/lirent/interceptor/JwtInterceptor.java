@@ -37,20 +37,39 @@ public class JwtInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        // 경로 예외 설정
+        /* 경로 예외 설정 */
+
+        // 회원 관련 URL
         if ("/api/member".equals(uri) && "POST".equalsIgnoreCase(method)) {
             return true;
         } else if ("/api/member/token".equalsIgnoreCase(uri)) {
             return true;
-        } else if (uri.startsWith("/api/sublease")) {
+        }
+
+        // Sublease 관련 관련
+        if (uri.startsWith("/api/sublease")) {
             return true;
-        } else if (uri.startsWith("/api/notice") && "GET".equalsIgnoreCase(method)) {
+        }
+
+        // notice 관련
+        if (uri.startsWith("/api/notice") && "GET".equalsIgnoreCase(method)) {
             return true;
-        } else if("/api/contract/generate".equalsIgnoreCase(uri)){
+        }
+
+        // 계약서 관련
+        if("/api/contract/generate".equalsIgnoreCase(uri)){
         	return true;
         } else if("/api/contract/download".equalsIgnoreCase(uri)){
         	return true;
-        } else if (uri.startsWith("/api/chats") && "GET".equalsIgnoreCase(uri)) {
+        }
+
+        // 채팅 관련
+        if (uri.startsWith("/api/chats") && "GET".equalsIgnoreCase(uri)) {
+            return true;
+        }
+
+        // SubleaseDeal 관련
+        if (uri.startsWith("/api/deal/")) {
             return true;
         }
 
