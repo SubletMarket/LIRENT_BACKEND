@@ -19,7 +19,6 @@ public class MemberDto {
     String phone;
     String address;
     String nickname;
-
     boolean park;
     int buildingElevatorNum;
     int floor;
