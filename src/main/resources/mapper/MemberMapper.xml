@@ -68,7 +68,7 @@
                             latitude,
                             longitude
                             )
-        VALUES (#{email}, #{password}, #{phone}, #{address}, #{nickname}, #{park}, #{buildingElevatorNum}, #{floor}, #{area}, #{rooms}, #{bathrooms});
+        VALUES (#{email}, #{password}, #{phone}, #{address}, #{nickname}, #{park}, #{buildingElevatorNum}, #{floor}, #{area}, #{rooms}, #{bathrooms}, #{latitude}, #{longitude});
     </insert>
 
     <update id="update" parameterType="memberDto">
