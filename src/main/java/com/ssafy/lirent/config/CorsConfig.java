@@ -12,6 +12,6 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:5173")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(true); // 쿠키를 사용할 경우 설정
+                .allowCredentials(true);
     }
 }

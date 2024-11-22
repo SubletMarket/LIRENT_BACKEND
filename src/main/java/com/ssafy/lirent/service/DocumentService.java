@@ -22,9 +22,9 @@ public class DocumentService {
             outputDir.mkdirs();
         }
 
-        String tenantName = replacements.get("bN");
+        String tenantName = replacements.get("toName");
         if (tenantName == null || tenantName.isEmpty()) {
-            throw new IllegalArgumentException("전차인 이름($bN)이 입력되지 않았습니다.");
+            throw new IllegalArgumentException("전차인 이름($toName)이 입력되지 않았습니다.");
         }
 
         String outputFileName = tenantName + "_Contract.docx";
