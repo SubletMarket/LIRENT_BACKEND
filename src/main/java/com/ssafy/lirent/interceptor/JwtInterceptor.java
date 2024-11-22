@@ -44,10 +44,12 @@ public class JwtInterceptor implements HandlerInterceptor {
             return true;
         } else if (uri.startsWith("/api/sublease")) {
             return true;
-        }else if("/api/contract/generate".equalsIgnoreCase(uri)){
+        } else if("/api/contract/generate".equalsIgnoreCase(uri)){
         	return true;
-        }else if("/api/contract/download".equalsIgnoreCase(uri)){
+        } else if("/api/contract/download".equalsIgnoreCase(uri)){
         	return true;
+        } else if (uri.startsWith("/api/chats") && "GET".equalsIgnoreCase(uri)) {
+            return true;
         }
 
         // JWT 토큰 유효성 여부 확인 및 처리
