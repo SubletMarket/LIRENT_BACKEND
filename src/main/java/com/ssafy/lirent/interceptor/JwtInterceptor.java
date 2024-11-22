@@ -44,6 +44,8 @@ public class JwtInterceptor implements HandlerInterceptor {
             return true;
         } else if (uri.startsWith("/api/sublease")) {
             return true;
+        } else if (uri.startsWith("/api/notice") && "GET".equalsIgnoreCase(method)) {
+            return true;
         }
 //        else if("/api/contract/generate".equalsIgnoreCase(uri)){
 //        	return true;

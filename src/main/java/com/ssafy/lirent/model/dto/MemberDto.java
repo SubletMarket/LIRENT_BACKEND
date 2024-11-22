@@ -27,6 +27,5 @@ public class MemberDto {
     int bathrooms;
     String latitude;
     String longitude;
-
     Timestamp created;
 }
