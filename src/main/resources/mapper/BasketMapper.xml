@@ -5,7 +5,7 @@
 <mapper namespace="com.ssafy.lirent.model.mapper.BasketMapper">
 
     <!-- 즐겨찾기 등록 -->
-    <insert id="insertBasket" parameterType="BasketDto">
+    <insert id="insertBasket" parameterType="basketDto">
         INSERT INTO basket (member_id, sublease_id)
         VALUES (#{memberId}, #{subleaseId})
     </insert>
@@ -17,7 +17,7 @@
     </delete>
 
     <!-- 모든 즐겨찾기 조회 -->
-    <select id="selectAllBaskets" parameterType="int" resultType="BasketDto">
+    <select id="selectAllBaskets" parameterType="int" resultType="basketDto">
         SELECT member_id AS memberId, 
                sublease_id AS subleaseId
         FROM basket
