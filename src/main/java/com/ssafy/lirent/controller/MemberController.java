@@ -94,11 +94,13 @@ public class MemberController {
 	ResponseEntity<Void> update(@RequestBody MemberUpdateRequestDto dto, HttpServletRequest request) {
 		int memberId = (int) request.getAttribute("memberId");
 		
-		System.out.println("sibal");
 		MemberDto member = new MemberDto();
 		member.setMemberId(memberId);
 		member.setEmail(dto.getEmail());
-		member.setPassword(dto.getPassword());
+		if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+	        String hashedPassword = memberService.hashPassword(dto.getPassword());
+	        member.setPassword(hashedPassword);
+	    }		
 		member.setNickname(dto.getNickname());
 		member.setPhone(dto.getPhone());
 		member.setAddress(dto.getAddress());
@@ -121,6 +123,7 @@ public class MemberController {
 	@DeleteMapping
 	@Operation(summary = "회원 삭제")
 	ResponseEntity<Void> delete(HttpServletRequest request) {
+		System.out.println("asdfgasdgasdfgadfgadfgad");
 		int memberId = (int) request.getAttribute("memberId");
 		System.out.println(memberId);
 		
