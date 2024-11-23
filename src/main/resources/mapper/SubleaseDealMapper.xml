@@ -7,20 +7,38 @@
         <result property="dealId" column="deal_id"/>
         <result property="subleaseId" column="sublease_id"/>
         <result property="contractorId" column="contractor_id"/>
+        <result property="contractorName" column="contractor_name"/>
+        <result property="contractorPhone" column="contractor_phone"/>
         <result property="startDate" column="start_date"/>
         <result property="endDate" column="end_date"/>
         <result property="deposit" column="deposit"/>
-        <result property="totalPrice" column="totalPrice"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="accepted" column="accepted" />
     </resultMap>
 
+    <select id="selectByMemberId" parameterType="int" resultMap="subleaseDealGetResponse">
+        SELECT deal_id, sublease_id, contractor_id, nickname as contractor_name, phone as contractor_phone, start_date, end_date, deposit, total_price, accepted
+        FROM sublease_deals JOIN members
+        ON (contractor_id = member_id)
+        WHERE contractor_id = #{memberId}
+        ORDER BY sublease_deals.created DESC
+    </select>
+
     <select id="selectBySubleaseId" parameterType="int" resultMap="subleaseDealGetResponse">
-        SELECT deal_id, sublease_id, contractor_id, start_date, end_date, deposit, total_price
-        FROM sublease_deals
-        WHERE sublease_id = #{subleaseId} AND accpeted = 1;
+        SELECT deal_id, sublease_id, contractor_id, nickname as contractor_name, phone as contractor_phone, start_date, end_date, deposit, total_price, accepted
+        FROM sublease_deals JOIN members
+        ON (contractor_id = member_id)
+        WHERE sublease_id = #{subleaseId}
+        ORDER BY sublease_deals.created DESC
     </select>
 
     <insert id="insert" parameterType="subleaseDealAddRequestDto">
         INSERT INTO sublease_deals (sublease_id, contractor_id, start_date, end_date, deposit, total_price)
         VALUES (#{subleaseId}, #{contractorId}, #{startDate}, #{endDate}, #{deposit}, #{totalPrice})
     </insert>
+
+    <update id="accept" parameterType="int">
+        UPDATE sublease_deals SET accepted=1
+        WHERE deal_id=#{dealId}
+    </update>
 </mapper>

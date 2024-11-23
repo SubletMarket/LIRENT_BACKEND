@@ -3,6 +3,7 @@ package com.ssafy.lirent.model.dto.sublease;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class SubleaseGetResponseDto {
     int subleaseId;
     int memberId;

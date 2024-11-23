@@ -36,4 +36,11 @@ public class SubleaseService {
 
 
     public SubleaseGetResponseDto getSublease(int subleaseId) { return subleaseMapper.select(subleaseId);}
+    public SubleaseGetResponseDto getLatestSubleaseByMemberId(int memberId) {
+        return subleaseMapper.selectLatestByMemberId(memberId);
+    }
+
+    public boolean deleteByMemberId(int memberId) {
+        return subleaseMapper.deleteByMemberId(memberId) >= 1;
+    }
 }

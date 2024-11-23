@@ -9,7 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface SubleaseDealMapper {
+    List<SubleaseDealGetResponseDto> selectByMemberId(int memberId);
     List<SubleaseDealGetResponseDto> selectBySubleaseId(int subleaseId);
-
-    Integer insert(SubleaseDealAddRequestDto newDeal);
+    int insert(SubleaseDealAddRequestDto newDeal);
+    int accept(int dealId);
 }
