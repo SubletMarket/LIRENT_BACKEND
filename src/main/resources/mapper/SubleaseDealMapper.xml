@@ -16,7 +16,7 @@
     <select id="selectBySubleaseId" parameterType="int" resultMap="subleaseDealGetResponse">
         SELECT deal_id, sublease_id, contractor_id, start_date, end_date, deposit, total_price
         FROM sublease_deals
-        WHERE sublease_id = #{subleaseId}
+        WHERE sublease_id = #{subleaseId} AND accpeted = 1;
     </select>
 
     <insert id="insert" parameterType="subleaseDealAddRequestDto">

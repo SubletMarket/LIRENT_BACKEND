@@ -64,15 +64,17 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
 
         // 채팅 관련
-        if (uri.startsWith("/api/chats") && "GET".equalsIgnoreCase(uri)) {
+        if (uri.startsWith("/api/chats") && "GET".equalsIgnoreCase(method)) {
             return true;
         }
 
         // SubleaseDeal 관련
-        if (uri.startsWith("/api/deal/")) {
+        if (uri.startsWith("/api/deal/") && "GET".equalsIgnoreCase(method)) {
             return true;
         }
 
+
+        /* 로그인 처리 */
         // JWT 토큰 유효성 여부 확인 및 처리
         String authorizationHeader = request.getHeader("Authorization");
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
