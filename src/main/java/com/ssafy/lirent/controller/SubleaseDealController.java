@@ -3,6 +3,7 @@ package com.ssafy.lirent.controller;
 import com.ssafy.lirent.model.dto.sublease.SubleaseDealAddRequestDto;
 import com.ssafy.lirent.model.dto.sublease.SubleaseDealGetResponseDto;
 import com.ssafy.lirent.service.SubleaseDealService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,11 @@ public class SubleaseDealController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> makeSubleaseDeal(@RequestBody SubleaseDealAddRequestDto dto) {
+    public ResponseEntity<Void> makeSubleaseDeal(@RequestBody SubleaseDealAddRequestDto dto, HttpServletRequest request) {
+        int memberId = (int) request.getAttribute("memberId");
+
+        dto.setContractorId(memberId);
+
         return service.insert(dto) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 }
