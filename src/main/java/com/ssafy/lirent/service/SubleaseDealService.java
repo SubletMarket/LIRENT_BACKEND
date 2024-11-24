@@ -50,4 +50,8 @@ public class SubleaseDealService {
 
         return false;
     }
+
+    public boolean delete(int dealId, int ownerId) {
+        return mapper.delete(dealId, ownerId) >= 1;
+    }
 }

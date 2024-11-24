@@ -13,4 +13,5 @@ public interface SubleaseDealMapper {
     List<SubleaseDealGetResponseDto> selectBySubleaseId(int subleaseId);
     int insert(SubleaseDealAddRequestDto newDeal);
     int accept(int dealId);
+    int delete(int dealId, int ownerId);
 }

@@ -41,4 +41,9 @@
         UPDATE sublease_deals SET accepted=1
         WHERE deal_id=#{dealId}
     </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM sublease_deals
+        WHERE deal_id = #{dealId} AND contractor_id = #{ownerId}
+    </delete>
 </mapper>

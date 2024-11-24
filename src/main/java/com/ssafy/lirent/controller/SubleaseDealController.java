@@ -64,4 +64,15 @@ public class SubleaseDealController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @DeleteMapping("{dealId}")
+    public ResponseEntity<Void> deleteSubleaseDeal(@PathVariable int dealId, HttpServletRequest requset) {
+        Integer memberId = (Integer) requset.getAttribute("memberId");
+
+        if (service.delete(dealId, memberId)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
