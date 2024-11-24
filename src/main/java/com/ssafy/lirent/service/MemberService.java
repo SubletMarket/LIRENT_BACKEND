@@ -104,5 +104,9 @@ public class MemberService {
 			throw new RuntimeException("SHA-256 algorithm not found", e);
 		}
 	}
+	public boolean isEmailExists(String email) {
+	    return mapper.isEmailExists(email); // Mapper나 Repository 계층에서 확인
+	}
+
 
 }

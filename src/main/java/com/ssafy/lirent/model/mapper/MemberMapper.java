@@ -27,4 +27,6 @@ public interface MemberMapper {
     public int update(MemberDto memberDto);
 
     public int delete(int memberId);
+    
+	public boolean isEmailExists(String email);
 }

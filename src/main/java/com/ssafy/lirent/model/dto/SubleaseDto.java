@@ -13,11 +13,11 @@ import java.sql.Timestamp;
 @ToString
 @NoArgsConstructor
 public class SubleaseDto {
-    int subleaseId;
-    int memberId;
-    Date startDate;
-    Date endDate;
-    int deposit;
-    int price;
-    Timestamp created;
+    private int subleaseId;
+    private int memberId;
+    private Date startDate;
+    private Date endDate;
+    private int deposit;
+    private int price;
+    private Timestamp created;
 }

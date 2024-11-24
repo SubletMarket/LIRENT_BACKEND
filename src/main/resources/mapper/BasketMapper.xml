@@ -4,24 +4,65 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.lirent.model.mapper.BasketMapper">
 
+    <!-- ResultMap 정의 -->
+    <resultMap id="SubleaseGetResponseMap" type="com.ssafy.lirent.model.dto.sublease.SubleaseGetResponseDto">
+        <id property="subleaseId" column="sublease_id"/>
+        <result property="memberId" column="member_id"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="deposit" column="deposit"/>
+        <result property="price" column="price"/>
+        <result property="created" column="created"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+        <result property="nickname" column="nickname"/>
+        <result property="park" column="park"/>
+        <result property="buildingElevatorNum" column="building_elevator_num"/>
+        <result property="floor" column="floor"/>
+        <result property="area" column="area"/>
+        <result property="rooms" column="rooms"/>
+        <result property="bathrooms" column="bathrooms"/>
+    </resultMap>
+
     <!-- 즐겨찾기 등록 -->
-    <insert id="insertBasket" parameterType="basketDto">
+    <insert id="insertBasket" parameterType="com.ssafy.lirent.model.dto.BasketDto">
         INSERT INTO basket (member_id, sublease_id)
         VALUES (#{memberId}, #{subleaseId})
     </insert>
 
     <!-- 즐겨찾기 삭제 -->
-    <delete id="deleteBasket">
-        DELETE FROM basket 
+    <delete id="deleteBasket" parameterType="map">
+        DELETE FROM basket
         WHERE member_id = #{memberId} AND sublease_id = #{subleaseId}
     </delete>
 
     <!-- 모든 즐겨찾기 조회 -->
-    <select id="selectAllBaskets" parameterType="int" resultType="basketDto">
-        SELECT member_id AS memberId, 
-               sublease_id AS subleaseId
-        FROM basket
-        WHERE member_id = #{memberId}
+    <select id="selectAllBaskets" parameterType="int" resultMap="SubleaseGetResponseMap">
+        SELECT
+            s.sublease_id,
+            s.member_id,
+            s.start_date,
+            s.end_date,
+            s.deposit,
+            s.price,
+            s.created,
+            m.latitude,
+            m.longitude,
+            m.phone,
+            m.address,
+            m.nickname,
+            m.park,
+            m.building_elevator_num,
+            m.floor,
+            m.area,
+            m.rooms,
+            m.bathrooms
+        FROM basket b
+        JOIN subleases s ON b.sublease_id = s.sublease_id
+        JOIN members m ON s.member_id = m.member_id
+        WHERE b.member_id = #{memberId}
     </select>
 
 </mapper>

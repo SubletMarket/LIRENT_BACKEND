@@ -49,7 +49,15 @@ public class MemberController {
 
 		return ResponseEntity.ok(responseDto);
 	}
+	
+	@Operation(summary = "유효성 검사")
+	@GetMapping("/exists/{email}")
+	public ResponseEntity<Boolean> checkEmailExists(@PathVariable String email) {
+	    boolean exists = memberService.isEmailExists(email);
+	    return ResponseEntity.ok(exists);
+	}
 
+	
 	@GetMapping("/userinfo")
 	@Operation(summary = "회원 정보 가져오기")
 	ResponseEntity<MemberDto> getInfo(HttpServletRequest request) {

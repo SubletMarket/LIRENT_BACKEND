@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.lirent.model.dto.BasketDto;
 import com.ssafy.lirent.model.mapper.BasketMapper;
+import com.ssafy.lirent.model.dto.sublease.SubleaseGetResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,7 +26,7 @@ public class BasketService {
         basketMapper.deleteBasket(memberId, subleaseId);
     }
 
-    public List<BasketDto> getAllBaskets(int memberId) {
+    public List<SubleaseGetResponseDto> getAllBaskets(int memberId) {
         return basketMapper.selectAllBaskets(memberId);
     }
 }

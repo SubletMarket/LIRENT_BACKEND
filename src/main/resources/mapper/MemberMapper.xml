@@ -3,93 +3,108 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.lirent.model.mapper.MemberMapper">
-    <resultMap id="member" type="MemberDto">
-        <result column="member_id" property="memberId" />
-        <result column="email" property="email" />
-        <result column="password" property="password" />
-        <result column="phone" property="phone" />
-        <result column="address" property="address" />
-        <result column="nickname" property="nickname" />
-        <result column="park" property="park" />
-        <result column="building_elevator_num" property="buildingElevatorNum" />
-        <result column="floor" property="floor" />
-        <result column="area" property="area" />
-        <result column="rooms" property="rooms" />
-        <result column="bathrooms" property="bathrooms" />
-        <result column="latitude" property="latitude" />
-        <result column="longitude" property="longitude" />
-        <result column="created" property="created" />
-    </resultMap>
+	<resultMap id="member" type="MemberDto">
+		<result column="member_id" property="memberId" />
+		<result column="email" property="email" />
+		<result column="password" property="password" />
+		<result column="phone" property="phone" />
+		<result column="address" property="address" />
+		<result column="nickname" property="nickname" />
+		<result column="park" property="park" />
+		<result column="building_elevator_num"
+			property="buildingElevatorNum" />
+		<result column="floor" property="floor" />
+		<result column="area" property="area" />
+		<result column="rooms" property="rooms" />
+		<result column="bathrooms" property="bathrooms" />
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
+		<result column="created" property="created" />
+	</resultMap>
 
-    <select id="getMemberById" parameterType="String" resultMap="member">
-        SELECT member_id, email, password, phone, address, nickname, created
-        FROM members
-        WHERE email = #{email} AND password = #{password}
-    </select>
+	<select id="getMemberById" parameterType="String"
+		resultMap="member">
+		SELECT member_id, email, password, phone, address, nickname, created
+		FROM members
+		WHERE email = #{email} AND password = #{password}
+	</select>
 
-    <select id="login" parameterType="String" resultType="int">
-        SELECT member_id
-        FROM members
-        WHERE email = #{email} AND password = #{password}
-    </select>
+	<select id="login" parameterType="String" resultType="int">
+		SELECT member_id
+		FROM members
+		WHERE email = #{email} AND password = #{password}
+	</select>
 
-    <select id="getInfo" parameterType="int" resultMap="member">
-        SELECT member_id,
-               email,
-               password,
-               phone,
-               address,
-               nickname,
-               park,
-               building_elevator_num,
-               floor,
-               area,
-               rooms,
-               bathrooms,
-               latitude,
-               longitude,
-               created
-        FROM members
-        WHERE member_id = #{memberId}
-    </select>
+	<select id="getInfo" parameterType="int" resultMap="member">
+		SELECT member_id,
+		email,
+		password,
+		phone,
+		address,
+		nickname,
+		park,
+		building_elevator_num,
+		floor,
+		area,
+		rooms,
+		bathrooms,
+		latitude,
+		longitude,
+		created
+		FROM members
+		WHERE member_id = #{memberId}
+	</select>
 
-    <insert id="regist" parameterType="memberDto">
-        INSERT INTO members(email,
-                            password,
-                            phone,
-                            address,
-                            nickname,
-                            park,
-                            building_elevator_num,
-                            floor,
-                            area,
-                            rooms,
-                            bathrooms,
-                            latitude,
-                            longitude
-                            )
-        VALUES (#{email}, #{password}, #{phone}, #{address}, #{nickname}, #{park}, #{buildingElevatorNum}, #{floor}, #{area}, #{rooms}, #{bathrooms}, #{latitude}, #{longitude});
-    </insert>
+	<insert id="regist" parameterType="memberDto">
+		INSERT INTO members(email,
+		password,
+		phone,
+		address,
+		nickname,
+		park,
+		building_elevator_num,
+		floor,
+		area,
+		rooms,
+		bathrooms,
+		latitude,
+		longitude
+		)
+		VALUES (#{email}, #{password}, #{phone}, #{address}, #{nickname}, #{park},
+		#{buildingElevatorNum}, #{floor}, #{area}, #{rooms}, #{bathrooms},
+		#{latitude}, #{longitude});
+	</insert>
 
-    <update id="update" parameterType="memberDto">
-        UPDATE members
-        SET email=#{email},
-            password=#{password},
-            phone=#{phone},
-            address=#{address},
-            nickname=#{nickname},
-            park=#{park},
-            building_elevator_num=#{buildingElevatorNum},
-            floor=#{floor},
-            area=#{area},
-            rooms=#{rooms},
-            bathrooms=#{bathrooms},
-            latitude=#{latitude},
-            longitude=#{longitude}
-        WHERE member_id=#{memberId}
-    </update>
-    <delete id="delete" parameterType="int">
-        DELETE FROM members
-        WHERE member_id=#{memberId}
-    </delete>
+	<update id="update" parameterType="memberDto">
+		UPDATE members
+		SET email=#{email},
+		password=#{password},
+		phone=#{phone},
+		address=#{address},
+		nickname=#{nickname},
+		park=#{park},
+		building_elevator_num=#{buildingElevatorNum},
+		floor=#{floor},
+		area=#{area},
+		rooms=#{rooms},
+		bathrooms=#{bathrooms},
+		latitude=#{latitude},
+		longitude=#{longitude}
+		WHERE member_id=#{memberId}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM members
+		WHERE member_id=#{memberId}
+	</delete>
+
+	<select id="isEmailExists" parameterType="String"
+		resultType="boolean">
+		SELECT EXISTS (
+		SELECT 1
+		FROM members
+		WHERE email = #{email}
+		)
+	</select>
+
+
 </mapper>
