@@ -14,10 +14,8 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @ToString
 public class SubleaseAddRequestDto {
-    @Schema(description = "날짜 (yyyy-MM-dd 형식)", example = "2024-11-20")
-    String startDate;
-    @Schema(description = "날짜 (yyyy-MM-dd 형식)", example = "2024-11-20")
-    String endDate;
+    Date startDate;
+    Date endDate;
     int deposit;
     int price;
 }

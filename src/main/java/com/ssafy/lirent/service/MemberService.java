@@ -58,9 +58,12 @@ public class MemberService {
 		String hashedPassword = hashPassword(newMember.getPassword());
 		newMember.setPassword(hashedPassword); // 해싱된 비밀번호로 설정
 
-		int result = mapper.regist(newMember); // 매퍼 호출
-
-		return result >= 1; // 성공 여부 반환
+		try {
+			int result = mapper.regist(newMember); // 매퍼 호출
+			return result >= 1; // 성공 여부 반환
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public MemberDto getInfo(int memberId) {

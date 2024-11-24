@@ -37,6 +37,19 @@ public class JwtInterceptor implements HandlerInterceptor {
             return true;
         }
 
+        /* 로그인 처리 */
+        // JWT 토큰 유효성 여부 확인 및 처리
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            String accessToken = authorizationHeader.substring(7);
+
+            // 토큰 검증
+            if (jwtUtil.checkToken(accessToken)) {
+                request.setAttribute("memberId", jwtUtil.getMemberId(accessToken));
+                return true;
+            }
+        }
+
         /* 경로 예외 설정 */
 
         // 회원 관련 URL
@@ -47,7 +60,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
 
         // Sublease 관련 관련
-        if (uri.startsWith("/api/sublease")) {
+        if (uri.startsWith("/api/sublease") && "GET".equalsIgnoreCase(method)) {
             return true;
         }
 
@@ -72,25 +85,11 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (uri.startsWith("/api/deal/") && "GET".equalsIgnoreCase(method)) {
             return true;
         }
-        
-     // SubleaseDeal 관련
+
         if (uri.startsWith("/api/member/exists/") && "GET".equalsIgnoreCase(method)) {
             return true;
         }
         
-        
-        /* 로그인 처리 */
-        // JWT 토큰 유효성 여부 확인 및 처리
-        String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            String accessToken = authorizationHeader.substring(7);
-
-            // 토큰 검증
-            if (jwtUtil.checkToken(accessToken)) {
-                request.setAttribute("memberId", jwtUtil.getMemberId(accessToken));
-                return true;
-            }
-        }
 
         // 로그인 안되있을 경우
         response.setStatus(HttpStatus.UNAUTHORIZED.value());

@@ -29,8 +29,8 @@ public class SubleaseController {
 
         SubleaseDto newSublease = new SubleaseDto();
         newSublease.setMemberId(memberId);
-        newSublease.setStartDate(Date.valueOf(dto.getStartDate()));
-        newSublease.setEndDate(Date.valueOf(dto.getEndDate()));
+        newSublease.setStartDate(dto.getStartDate());
+        newSublease.setEndDate(dto.getEndDate());
         newSublease.setDeposit(dto.getDeposit());
         newSublease.setPrice(dto.getPrice());
 
@@ -45,6 +45,8 @@ public class SubleaseController {
     public ResponseEntity<List<SubleaseGetResponseDto>> getAllSubleases() {
         List<SubleaseGetResponseDto> list = subleaseService.getAllSubleases();
 
+        System.out.println(list);
+
         if (list != null) {
             return ResponseEntity.ok(list);
         } else {
@@ -58,6 +60,17 @@ public class SubleaseController {
 
         if (sublease != null) {
             return ResponseEntity.ok(sublease);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> delete(HttpServletRequest request) {
+        int memberId = (int) request.getAttribute("memberId");
+
+        if (subleaseService.deleteByMemberId(memberId)) {
+            return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.badRequest().build();
         }

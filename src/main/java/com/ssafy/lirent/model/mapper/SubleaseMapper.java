@@ -11,4 +11,6 @@ public interface SubleaseMapper {
     public int insert(SubleaseDto newSublease);
     public List<SubleaseGetResponseDto> selectAll();
     public SubleaseGetResponseDto select(int subleaseId);
+    public SubleaseGetResponseDto selectLatestByMemberId(int memberId);
+    public int deleteByMemberId(int memberId);
 }
