@@ -84,9 +84,13 @@
 		UPDATE members
 		SET
 		email=#{email},
+<<<<<<< HEAD
 		<if test="password != null and password != ''">
             password=#{password},
         </if>
+=======
+		password=#{password},
+>>>>>>> e15d361a2d4e9e7d5d97dc6e0902d7fd37524e88
 		phone=#{phone},
 		address=#{address},
 		nickname=#{nickname},
