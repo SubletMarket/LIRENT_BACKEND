@@ -24,19 +24,22 @@
 
 	<select id="getMemberById" parameterType="String"
 		resultMap="member">
-		SELECT member_id, email, password, phone, address, nickname, created
+		SELECT member_id, email, password, phone, address, nickname,
+		created
 		FROM members
 		WHERE email = #{email} AND password = #{password}
 	</select>
 
 	<select id="login" parameterType="String" resultType="int">
-		SELECT member_id
+		SELECT
+		member_id
 		FROM members
 		WHERE email = #{email} AND password = #{password}
 	</select>
 
 	<select id="getInfo" parameterType="int" resultMap="member">
-		SELECT member_id,
+		SELECT
+		member_id,
 		email,
 		password,
 		phone,
@@ -70,15 +73,20 @@
 		latitude,
 		longitude
 		)
-		VALUES (#{email}, #{password}, #{phone}, #{address}, #{nickname}, #{park},
-		#{buildingElevatorNum}, #{floor}, #{area}, #{rooms}, #{bathrooms},
+		VALUES (#{email}, #{password},
+		#{phone}, #{address}, #{nickname}, #{park},
+		#{buildingElevatorNum},
+		#{floor}, #{area}, #{rooms}, #{bathrooms},
 		#{latitude}, #{longitude});
 	</insert>
 
 	<update id="update" parameterType="memberDto">
 		UPDATE members
-		SET email=#{email},
-		password=#{password},
+		SET
+		email=#{email},
+		<if test="password != null and password != ''">
+            password=#{password},
+        </if>
 		phone=#{phone},
 		address=#{address},
 		nickname=#{nickname},
@@ -94,7 +102,8 @@
 	</update>
 	<delete id="delete" parameterType="int">
 		DELETE FROM members
-		WHERE member_id=#{memberId}
+		WHERE
+		member_id=#{memberId}
 	</delete>
 
 	<select id="isEmailExists" parameterType="String"
@@ -106,5 +115,17 @@
 		)
 	</select>
 
+	<select id="getMemberByEmail" parameterType="String"
+		resultMap="member">
+		SELECT *
+		FROM members
+		WHERE email = #{email}
+	</select>
 
+	<!-- 비밀번호 업데이트 -->
+	<update id="updatePassword" parameterType="map">
+		UPDATE members
+		SET password = #{password}
+		WHERE member_id = #{memberId}
+	</update>
 </mapper>
