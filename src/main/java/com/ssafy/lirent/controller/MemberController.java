@@ -10,6 +10,8 @@ import com.ssafy.lirent.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -141,4 +143,20 @@ public class MemberController {
 			return ResponseEntity.badRequest().build();
 		}
 	}
+	
+	@PostMapping("/reset-password")
+	@Operation(summary = "비밀번호 초기화")
+	public ResponseEntity<Void> resetPassword(@RequestBody Map<String, String> requestData) {
+	    String email = requestData.get("email");
+	    String name = requestData.get("name");
+
+	    boolean isReset = memberService.resetPassword(email, name);
+
+	    if (isReset) {
+	        return ResponseEntity.ok().build();
+	    } else {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	    }
+	}
+	
 }

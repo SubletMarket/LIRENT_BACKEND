@@ -31,9 +31,8 @@ public class DocumentController {
     @GetMapping("/download")
     public ResponseEntity<FileSystemResource> downloadContract(@RequestParam String filePath) {
         // 기준 경로
-        final String BASE_PATH = "C:\\Users\\SSAFY\\Desktop\\Final_project\\LIRENT_BACKEND\\src\\main\\resources\\contract\\ContractResults";
-        
-        System.out.println("??S");
+//        final String BASE_PATH = "C:\\Users\\SSAFY\\Desktop\\Final_project\\LIRENT_BACKEND\\src\\main\\resources\\contract\\ContractResults";
+        final String BASE_PATH = "src/main/resources/contract/ContractResults";
         try {
             // 사용자 입력 경로를 기준 경로와 결합하여 안전한 파일 경로 생성
             File file = new File(BASE_PATH, new File(filePath).getName());

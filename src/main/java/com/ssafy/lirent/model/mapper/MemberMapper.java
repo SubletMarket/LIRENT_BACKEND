@@ -4,6 +4,7 @@ import com.ssafy.lirent.model.dto.MemberDto;
 import com.ssafy.lirent.model.dto.member.MemberRegistRequestDto;
 import com.ssafy.lirent.model.dto.member.MemberUpdateRequestDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberMapper {
@@ -29,4 +30,7 @@ public interface MemberMapper {
     public int delete(int memberId);
     
 	public boolean isEmailExists(String email);
+	public MemberDto getMemberByEmail(String email);
+	int updatePassword(@Param("memberId") int memberId, @Param("password") String password);
+
 }

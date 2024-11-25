@@ -90,6 +90,10 @@ public class JwtInterceptor implements HandlerInterceptor {
             return true;
         }
         
+        if (uri.startsWith("/api/member/reset-password") && "GET".equalsIgnoreCase(method)) {
+            return true;
+        }
+        
 
         // 로그인 안되있을 경우
         response.setStatus(HttpStatus.UNAUTHORIZED.value());

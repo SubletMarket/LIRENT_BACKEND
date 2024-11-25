@@ -37,14 +37,14 @@ public class MemberService {
 //		} else {
 //			return memberId;
 //		}
-		 // 입력된 비밀번호를 해싱
-	    String hashedPassword = hashPassword(password);
+		// 입력된 비밀번호를 해싱
+		String hashedPassword = hashPassword(password);
 
-	    // 해싱된 비밀번호로 로그인 검증
-	    Integer memberId = mapper.login(email, hashedPassword);
-	    System.out.println("로그인 요청: " + email + " / " + hashedPassword);
+		// 해싱된 비밀번호로 로그인 검증
+		Integer memberId = mapper.login(email, hashedPassword);
+		System.out.println("로그인 요청: " + email + " / " + hashedPassword);
 
-	    return memberId; // 로그인 성공 시 memberId 반환, 실패 시 null 반환
+		return memberId; // 로그인 성공 시 memberId 반환, 실패 시 null 반환
 	}
 
 	public boolean regist(MemberDto newMember) {
@@ -107,9 +107,23 @@ public class MemberService {
 			throw new RuntimeException("SHA-256 algorithm not found", e);
 		}
 	}
+
 	public boolean isEmailExists(String email) {
-	    return mapper.isEmailExists(email); // Mapper나 Repository 계층에서 확인
+		return mapper.isEmailExists(email); // Mapper나 Repository 계층에서 확인
 	}
 
+	public boolean resetPassword(String email, String name) {
+	    MemberDto member = mapper.getMemberByEmail(email);
+	    if (member != null && member.getNickname().equals(name)) {
+	        String defaultPassword = "1234";
+	        String hashedPassword = hashPassword(defaultPassword);
+
+	        // 비밀번호 업데이트
+	        int result = mapper.updatePassword(member.getMemberId(), hashedPassword);
+	        return result > 0;
+	    } else {
+	        return false;
+	    }
+	}
 
 }
